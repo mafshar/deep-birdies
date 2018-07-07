@@ -9,9 +9,16 @@ from torchvision import utils as vutils
 
 from os.path import join
 from processing import data_processor
+from processing import utils
 from models import gans
 
 DATA_DIR = './data/'
+RESULTS_DIR = './results'
+
+def initializer():
+    utils.mkdir(DATA_DIR)
+    utils.mkdir(RESULTS_DIR)
+    return
 
 def train(dataloader, num_epochs=25):
     netG = gans.Generator()
@@ -71,9 +78,7 @@ def train(dataloader, num_epochs=25):
                     '%s/fake_samples_epoch_%03d.png' % ("./results", epoch),
                     normalize = True)
 
-
-
 if __name__ == '__main__':
+    initializer()
     dataloader = data_processor.load_data(DATA_DIR)
-
     train(dataloader)
