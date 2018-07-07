@@ -5,6 +5,7 @@ import torch.nn.parallel
 
 from torch import optim
 from torch.autograd import Variable
+from torchvision import utils as vutils
 
 from os.path import join
 from processing import data_processor
