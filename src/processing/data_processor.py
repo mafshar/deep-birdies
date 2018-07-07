@@ -5,7 +5,6 @@ import sys
 from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision import transforms
-from torchvision import utils as vutils
 
 BATCH_SIZE = 64
 IMG_SIZE = 64
