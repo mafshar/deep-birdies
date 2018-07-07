@@ -2,10 +2,6 @@
 import os
 import sys
 
-import torch
-import torch.nn as nn
-import torch.nn.parallel
-
 from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision import transforms
@@ -16,13 +12,13 @@ IMG_SIZE = 64
 
 def get_transformations():
     return transforms.Compose(
-        [transforms.Scale(IMG_SIZE),
+        [transforms.Resize(IMG_SIZE),
         transforms.ToTensor(),
         transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
 def load_data(data_path):
     try:
-        data = dataset.CIFAR10(
+        data = datasets.CIFAR10(
             root=data_path,
             download=True,
             transform=get_transformations())
