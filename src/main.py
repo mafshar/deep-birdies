@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import torch
 import torch.nn as nn
 import torch.nn.parallel
 
@@ -14,10 +15,12 @@ from models import gans
 
 DATA_DIR = './data/'
 RESULTS_DIR = './results'
+MODELS_DIR = join(RESULTS_DIR, 'models')
 
 def initializer():
     utils.mkdir(DATA_DIR)
     utils.mkdir(RESULTS_DIR)
+    utils.mkdir(MODELS_DIR)
     return
 
 def train(dataloader, num_epochs=25):
@@ -77,6 +80,9 @@ def train(dataloader, num_epochs=25):
                     fake.data,
                     '%s/fake_samples_epoch_%03d.png' % ("./results", epoch),
                     normalize = True)
+
+    torch.save(netG.state_dict(), join(MODELS_DIR, 'generator.pth'))
+    torch.save(netD.state_dict(), join(MODELS_DIR, 'discriminator.pth'))
 
 if __name__ == '__main__':
     initializer()
